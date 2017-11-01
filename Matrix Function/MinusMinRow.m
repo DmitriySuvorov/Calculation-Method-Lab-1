@@ -3,7 +3,7 @@ function [iMat] = MinusMinRow(IMatSize,iMat)
 try
     for i = 1:IMatSize
         arrRow = GetRow(i,iMat); %arrRow - массив текущей строки
-        RowMin = FindMin(arrRow); %RowMax - минимальный элемент в строке
+        RowMin = FindMin(arrRow); %RowMin - минимальный элемент в строке
         for j = 1:IMatSize
             iMat(i,j) = iMat(i,j)- RowMin;
         end

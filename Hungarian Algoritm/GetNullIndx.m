@@ -1,22 +1,22 @@
-function [arrPlusCol,arrPlusRow,iNullCount] = GetNullIndx(iMatSize,iMat)
+function [PlusItemsCol,PlusItemsRow,iNullCount] = GetNullIndx(iMatSize,iMat)
 %Получение индексов СНН
 %try
-    arrPlusRow = zeros(1,iMatSize); %массив, ненулевой элемент которого хранит
-                                  %номер строки элемента,входящего в СНН
-    arrPlusCol = zeros(1,iMatSize); %массив, ненулевой элемент которого хранит
-                                  %номер столбца элемента,входящего в СНН
-    arrExistCol = zeros(1,iMatSize);
-    arrExistRow = zeros(1,iMatSize);
+    PlusItemsRow = zeros(1,iMatSize);
+    for i = 1:iMatSize
+        PlusItemsRow(i) = -1;
+    end
+    PlusItemsCol = zeros(1,iMatSize);
+    for i = 1:iMatSize
+        PlusItemsCol(i) = -1;
+    end
     iNullCount = 0;
     for j = 1:iMatSize %Проход по столбцам
         arrTempCol = GetColumn(j,iMat); %текущий считываемый столбец
         for i = 1:iMatSize %проверка столбца на наличие нулей
-            if arrTempCol(i) == 0 && arrExistCol(j) == 0 && arrExistRow(i) == 0
-                arrExistCol(j) = 1;
-                arrExistRow(i) = 1;
-                iNullCount=iNullCount+1;
-                arrPlusCol(iNullCount) = j;
-                arrPlusRow(iNullCount) = i;
+            if arrTempCol(i) == 0 && PlusItemsCol(j) == -1 && PlusItemsRow(i) == -1
+                PlusItemsCol(j) = i;
+                PlusItemsRow(i) = j;
+                iNullCount = iNullCount + 1;
             end
         end
     end
