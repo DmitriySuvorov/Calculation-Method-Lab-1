@@ -7,21 +7,21 @@ function [iMat] = GeneralStage(iMatSize,iMat)
     %Если i-й элемет <>-1, то в нем содержится номер строки с СНН
     %PlusItemsRow -||- для строки
 
-    if bDeb == true
-        fprintf('СНН:\n');
-        ShowCINMatrix(iPlusNull,PlusItemsCol,[-1 -1],iMat);
-    end
+     if bDeb == true
+         FirstShowCINMatrix(iPlusNull,PlusItemsCol,[-2 -2],iMat);
+     end
 
 
     while iPlusNull < iMatSize
         %Поиск нуля, среди невыделенных элементов
         [bHasUnmarkedNull,arrComItems] = CheckUnmarkedNull(iMat,PlusItemsCol);
         if bHasUnmarkedNull
+            if bDeb == true
+                ShowComMatrix(PlusItemsCol,PlusItemsRow,arrComItems,iMat);
+            end
             [PlusItemsCol,iPlusNull] = ChangePlus(PlusItemsCol,arrComItems);
         end
         if bDeb == true
-            fprintf('СНН:\n');
-            ShowComMatrix(iPlusNull,PlusItemsCol,arrComItems,iMat);
             ShowCINMatrix(iPlusNull,PlusItemsCol,arrComItems,iMat);
         end
     end

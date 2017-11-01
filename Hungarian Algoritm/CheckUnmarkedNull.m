@@ -15,7 +15,7 @@ function [bHasNull,arrComItems] = CheckUnmarkedNull(iMat,PlusItems)
                 if iMat(i,j) == 0
                     bHasNull = true;
                     arrComItems(1) = i;
-                    arrComItems(2) = j;
+                    arrComItems(2) = j;                    
                 end
             end
         end

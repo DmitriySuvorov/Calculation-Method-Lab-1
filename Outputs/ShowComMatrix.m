@@ -1,4 +1,4 @@
-function ShowComMatrix(iNullCount,PlusItemsCol,arrComNull,iMat)
+function ShowComMatrix(PlusItemsCol,PlusItemsRow,arrComNull,iMat)
 %Вывод СНН на экран (для наглядности выбора)
 %try
 
@@ -6,7 +6,7 @@ function ShowComMatrix(iNullCount,PlusItemsCol,arrComNull,iMat)
 %вывод плюсиков
 fprintf('   ');
     for i = 1:length(PlusItemsCol)
-        if PlusItemsCol(i) ~= -1
+        if PlusItemsCol(i) ~= -1 && PlusItemsCol(i) ~= arrComNull(1)
             fprintf('+');
         else
             fprintf(' ');
@@ -32,7 +32,7 @@ fprintf('   ');
         end 
         fprintf('\n');
     end
-    fprintf('Строку %.1d пометим "+", уберем выделение со столбца %.1d:\n',arrComNull(1),arrComNull(2)); 
+    fprintf('Строку %.1d пометим "+", уберем выделение со столбца %.1d:\n',arrComNull(1),PlusItemsRow(arrComNull(1))); 
 %catch
 %    fprintf('Ошибка при простроении СНН\n');
 %end

@@ -1,6 +1,7 @@
 function ShowCINMatrix(iNullCount,PlusItemsCol,arrComNull,iMat)
 %Вывод СНН на экран (для наглядности выбора)
 %try
+fprintf('СНН:\n');
 %вывод плюсиков
 fprintf('   ');
     for i = 1:length(PlusItemsCol)
