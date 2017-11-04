@@ -1,4 +1,4 @@
-function [PlusItems,iPlusNull] = ChangePlus(PlusItems,arrComItems,delColForOutput)
+function [PlusItems,iPlusNull] = ChangePlus(PlusItems,arrComItems)
 %Выделение "+" строки с 0', снятие "+" со столбца с 0*
 
 %Устанавливаем в "-1" элемент под номером, соответствующим новой выделенной
@@ -6,8 +6,6 @@ function [PlusItems,iPlusNull] = ChangePlus(PlusItems,arrComItems,delColForOutpu
 for i = 1:length(PlusItems)
     if PlusItems(i) == arrComItems(1)
         PlusItems(i) = -1;
-        delColForOutput = PlusItems(i); %для вывода названия столбца, с 
-                                        %которого будем убирать "+"
     end
 end
 

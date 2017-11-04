@@ -1,12 +1,18 @@
-function ShowComMatrix(PlusItemsCol,PlusItemsRow,arrComNull,iMat)
+function ShowComMatrix(PlusItemsCol,arrComNull,iMat)
 %Вывод СНН на экран (для наглядности выбора)
 %try
-
     fprintf('Невыделенный нулевой элемент [%.1d;%.1d] выделен красным:\n',arrComNull(2),arrComNull(1));
-%вывод плюсиков
+    k = -1; %k - номер столбца, с которого убираем "+"
+    for i = 1:length(PlusItemsCol)
+        if arrComNull(1) == PlusItemsCol(i)
+            k = i;
+        end
+    end
+
+%вывод "+" над столбцами
 fprintf('   ');
     for i = 1:length(PlusItemsCol)
-        if PlusItemsCol(i) ~= -1 && PlusItemsCol(i) ~= arrComNull(1)
+        if PlusItemsCol(i) ~= -1
             fprintf('+');
         else
             fprintf(' ');
@@ -18,21 +24,19 @@ fprintf('   ');
     for i = 1:length(PlusItemsCol)
         fprintf('   ');
         for j = 1:length(PlusItemsCol)
-            bColor = false;
-            if PlusItemsCol(j) == i
-                bColor = true;
-            end
-            if arrComNull(1) == i && arrComNull(2) == j
+             if arrComNull(1) == i && arrComNull(2) == j
                 cprintf('*red','%.1d   ',iMat(i,j));
-            elseif bColor == true
+            elseif PlusItemsCol(j) == i
                 cprintf('*blue','%.1d   ',iMat(i,j));
             else
                 fprintf('%.1d   ',iMat(i,j));
-            end
+             end
         end 
         fprintf('\n');
     end
-    fprintf('Строку %.1d пометим "+", уберем выделение со столбца %.1d:\n',arrComNull(1),PlusItemsRow(arrComNull(1))); 
+    if k ~= -1
+        fprintf('Строку %.1d пометим "+", уберем выделение со столбца %.1d:\n',arrComNull(1),k); 
+    end
 %catch
 %    fprintf('Ошибка при простроении СНН\n');
 %end

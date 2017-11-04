@@ -20,7 +20,7 @@ fprintf('СНН:\n');
         fprintf('\n');
     end
     
-    fprintf('Количество нулевых элементов: %.1d\n',iNullCount);
+    fprintf('Количество невыделенных нулевых элементов: %.1d\n',iNullCount);
 %catch
 %    fprintf('Ошибка при простроении СНН\n');
 %end

@@ -6,7 +6,7 @@ function [iMat] = GeneralStage(iMatSize,iMat)
     %PlusColumn - номер элемента соответствует номеру столбца
     %Если i-й элемет <>"-1", то в нем содержится номер строки с СНН
     %PlusItemsRow -||- для строки
-FirstShowCINMatrix(iPlusNull,PlusItemsCol,[-2 -2],iMat);
+
 
     %выполняем цикл, пока количество выделенных нулей не станет равнм
     %размерности матрицы
@@ -20,9 +20,8 @@ FirstShowCINMatrix(iPlusNull,PlusItemsCol,[-2 -2],iMat);
         if bHasUnmarkedNull
             ShowComMatrix(PlusItemsCol,arrComItems,iMat);
             [PlusItemsCol,iPlusNull] = ChangePlus(PlusItemsCol,arrComItems);
-            ShowCINMatrix(iPlusNull,PlusItemsCol,arrComItems,iMat);
         end
-       
+        %ShowCINMatrix(iPlusNull,PlusItemsCol,arrComItems,iMat);
 
     end
  FirstShowCINMatrix(iPlusNull,PlusItemsCol,[-2 -2],iMat);

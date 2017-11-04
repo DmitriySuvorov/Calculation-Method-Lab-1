@@ -1,4 +1,4 @@
-%[iMatSize, iMat] = MatrixInput;
+% [iMatSize, iMat] = MatrixInput;
 iMat=[6 10 4 5 8;
       8 10 7 9 11;
       4 8 9 10 6;
