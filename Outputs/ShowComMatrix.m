@@ -38,7 +38,7 @@ fprintf('   ');
         end 
         fprintf('\n');
     end
-        fprintf('Строку %.1d пометим "+", уберем выделение со столбца %.1d:\n',iComRow(length(iComRow))); 
+        fprintf('Строку %.1d пометим "+", уберем выделение со столбца,  в котором находится синий ноль %.1d:\n',iComRow(length(iComRow))); 
 end
 %catch
 %    fprintf('Ошибка при простроении СНН\n');
