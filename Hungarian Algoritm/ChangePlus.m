@@ -1,26 +1,37 @@
-function [PlusItems,iPlusNull] = ChangePlus(PlusItems,arrComItems,delColForOutput)
+function [PlusItems,iComRow,iComCol] = ChangePlus(PlusItems,iComRow,iComCol,arrComRow,iMat)
 %Выделение "+" строки с 0', снятие "+" со столбца с 0*
-
-%Устанавливаем в "-1" элемент под номером, соответствующим новой выделенной
-%строке
-for i = 1:length(PlusItems)
-    if PlusItems(i) == arrComItems(1)
-        PlusItems(i) = -1;
-        delColForOutput = PlusItems(i); %для вывода названия столбца, с 
-                                        %которого будем убирать "+"
+bNullInRow = true;
+%Поиск выделенного элемента в строчке с 0'
+while bNullInRow
+    bNullInRow = false;
+for j = 1:length(PlusItems) 
+    if PlusItems(j) == iComRow(length(iComRow))
+        %Снятие выделения со столбца
+        PlusItems(j) = -1;
+        n = j;
+        %Выделение строки с 0'
+        arrComRow(iComRow(length(iComRow))) = 1;
+        bNullInRow = true;
     end
 end
-
-%Записываем номер новой строки в соответствующий столбец выделенных
-%элементов
-    PlusItems(arrComItems(2)) = arrComItems(1);
-iPlusNull = 0;
-
-%Подсчет количества нулевых выделенных элементов
+if bNullInRow
+    
 for i = 1:length(PlusItems)
-    if PlusItems(i) ~= -1
-        iPlusNull = iPlusNull + 1;
+    if iMat(i,n) == 0 && arrComRow(i) == 0
+        iComCol = MyPush(iComCol,i);
+        iComRow = MyPush(iComRow,n);
+        
     end
 end
 end
+end
+if bNullInRow == false
+    while length(iComCol)>0 && length(iComRow)>0
+        [iComCol,iNewNullCol] = MyPop(iComCol);
+        [iComRow,iNewNullRow] = MyPop(iComRow);
+        PlusItems(iNewNullCol) = iNewNullRow;
+    end
+    arrComRow = zeros(1,length(PlusItems));
+end  
+end 
 

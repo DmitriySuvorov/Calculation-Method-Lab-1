@@ -1,9 +1,7 @@
-function FirstShowCINMatrix(iNullCount,PlusItemsCol,arrComNull,iMat)
-%Вывод СНН на экран (для наглядности выбора)
-%try
+function FirstShowCINMatrix(iNullCount,PlusItemsCol,iMat)
+%Вывод матрицы с выделенной СНН другим шрифтом 
+try
 fprintf('СНН:\n');
-
-%Вывод матрицы с выделенной СНН другим шрифтом   
     for i = 1:length(PlusItemsCol)
         fprintf('   ');
         for j = 1:length(PlusItemsCol)
@@ -21,8 +19,9 @@ fprintf('СНН:\n');
     end
     
     fprintf('Количество невыделенных нулевых элементов: %.1d\n',iNullCount);
-%catch
-%    fprintf('Ошибка при простроении СНН\n');
-%end
+    
+catch
+    fprintf('Ошибка при простроении СНН\n');
+end
 end
 

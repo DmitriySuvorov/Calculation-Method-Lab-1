@@ -1,42 +1,48 @@
-function ShowCINMatrix(iNullCount,PlusItemsCol,arrComNull,iMat)
+function ShowCINMatrix(PlusItemsCol,arrNull,iMat,iComRow,iComCol)
 %Вывод СНН на экран (для наглядности выбора)
-%try
-fprintf('СНН:\n');
-%вывод плюсиков
-fprintf('   ');
-    for i = 1:length(PlusItemsCol)
-        if PlusItemsCol(i) ~= -1 && arrComNull(2) ~= i
-            fprintf('+');
-        else
-            fprintf(' ');
-        end
-        fprintf('   ');
-    end 
+try
+    arrNull(iComRow(length(iComRow))) = 1;
     fprintf('\n');
-%Вывод матрицы с выделенной СНН другим шрифтом   
-    for i = 1:length(PlusItemsCol)
-        fprintf('   ');
-        for j = 1:length(PlusItemsCol)
-            bColor = false;
-            if PlusItemsCol(j) == i
-                bColor = true;
-            end
-            if bColor == true
-                cprintf('*blue','%.1d   ',iMat(i,j));
+    %вывод плюсов 
+    fprintf('   ');
+        for i = 1:length(PlusItemsCol)
+            if PlusItemsCol(i) ~= -1
+                fprintf('+');
             else
-                fprintf('%.1d   ',iMat(i,j));
+                fprintf(' ');
             end
+            fprintf('   ');
         end 
-        if arrComNull(1) == i
-            fprintf(' +');
-        end
         fprintf('\n');
-    end
-    
-    fprintf('Количество нулевых элементов: %.1d\n',iNullCount);
-
-%catch
-%    fprintf('Ошибка при простроении СНН\n');
-%end
+    %Вывод матрицы с выделенной СНН другим шрифтом   
+        for i = 1:length(PlusItemsCol)
+            fprintf('   ');
+            for j = 1:length(PlusItemsCol)
+                bBlue = false;
+                bRed = false;
+                for c = 1:length(iComCol)
+                    if iComCol(c) == j && iComRow(c) == i
+                        bRed = true;
+                    end
+                end
+                if PlusItemsCol(j) == i
+                    bBlue = true;
+                end
+                if bRed%iComRow(length(iComRow)) == i && iComCol(length(iComCol))== j
+                    cprintf('*red','%.1d   ',iMat(i,j));
+                 elseif PlusItemsCol(j) == i
+                    cprintf('*blue','%.1d   ',iMat(i,j));
+                 else
+                    fprintf('%.1d   ',iMat(i,j));
+                 end
+            end 
+            if arrNull(i) ~= 0
+                fprintf(' +');
+            end
+            fprintf('\n');
+        end
+catch
+    fprintf('Ошибка при простроении СНН\n');
+end
 end
 
